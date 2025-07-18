@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Optional: Fix navbar link styles (if needed) */
+.navbar a {
+  @apply text-black no-underline hover:text-orange-600;
+}
+
+/* ❌ Removed problematic @apply for text-orange-600 */
