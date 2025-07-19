@@ -13,7 +13,7 @@ const OrderNow = () => {
   useEffect(() => {
     const fetchMeals = async () => {
       try {
-        const res = await axios.get('https://api-node-food.onrender.com/api/meals');
+        const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/meals`);
         setMeals(res.data);
         setFilteredMeals(res.data);
       } catch (err) {
@@ -38,7 +38,7 @@ const OrderNow = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.post(
-        'https://api-node-food.onrender.com/api/orders',
+        `${process.env.REACT_APP_API_BASE_URL}/api/orders`,
         { mealId },
         {
           headers: {
