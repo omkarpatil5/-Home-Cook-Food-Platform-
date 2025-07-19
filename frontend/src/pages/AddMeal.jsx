@@ -3,13 +3,14 @@ import axios from 'axios';
 
 const AddMeal = () => {
   const [meal, setMeal] = useState({
-  title: '',
-  description: '',
-  price: '',
-  image: '', // ← Add this
-});
+    title: '',
+    description: '',
+    price: '',
+    image: '',
+  });
 
   const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     setMeal((prev) => ({
@@ -21,10 +22,11 @@ const AddMeal = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
+    setError('');
 
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.post(
+      await axios.post(
         `${process.env.REACT_APP_API_BASE_URL}/api/meals/add`,
         meal,
         {
@@ -33,11 +35,11 @@ const AddMeal = () => {
           },
         }
       );
-      setMessage('Meal added successfully!');
-      setMeal({ title: '', description: '', price: '', image: '' }); // ✅ clear all fields
-
+      setMessage('✅ Meal added successfully!');
+      setMeal({ title: '', description: '', price: '', image: '' });
     } catch (err) {
-      setMessage(err.response?.data?.error || 'Error adding meal');
+      console.error(err);
+      setError(err.response?.data?.error || '❌ Error adding meal');
     }
   };
 
@@ -55,14 +57,13 @@ const AddMeal = () => {
           className="w-full border border-gray-300 rounded px-4 py-2"
         />
         <input
-  type="text"
-  name="image"
-  placeholder="Image URL"
-  value={meal.image}
-  onChange={handleChange}
-  className="w-full border border-gray-300 rounded px-4 py-2"
-/>
-
+          type="text"
+          name="image"
+          placeholder="Image URL"
+          value={meal.image}
+          onChange={handleChange}
+          className="w-full border border-gray-300 rounded px-4 py-2"
+        />
         <textarea
           name="description"
           placeholder="Meal Description"
@@ -87,7 +88,9 @@ const AddMeal = () => {
           Submit
         </button>
       </form>
-      {message && <p className="mt-4 text-center text-sm text-green-600">{message}</p>}
+
+      {message && <p className="mt-4 text-center text-green-600">{message}</p>}
+      {error && <p className="mt-4 text-center text-red-600">{error}</p>}
     </div>
   );
 };
