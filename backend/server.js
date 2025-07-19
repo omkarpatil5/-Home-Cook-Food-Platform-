@@ -8,7 +8,10 @@ import mealRoutes from './routes/mealRoutes.js';
 
 dotenv.config();
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: 'https://your-vercel-app.vercel.app', // Replace with your actual frontend URL
+  credentials: true,
+}));
 app.use(express.json());
 
 
@@ -17,10 +20,7 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/meals', mealRoutes);
 
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => {
+mongoose.connect(process.env.MONGO_URI).then(() => {
     console.log('MongoDB connected');
     app.listen(5000, () => console.log('Server running on port 5000'));
 }).catch(err => console.log(err));

@@ -26,7 +26,7 @@ const Login = () => {
     setError('');
     setSuccess('');
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', formData);
+      const res = await axios.post('https://api-node-food.onrender.com/api/auth/login', formData);
       const { token, user } = res.data;
 
       login(user, token); // ⬅️ use context login instead of localStorage.setItem

@@ -12,7 +12,7 @@ const Home = () => {
   useEffect(() => {
     const fetchMeals = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/meals');
+        const res = await axios.get('https://api-node-food.onrender.com/api/meals');
         setMeals(res.data);
       } catch (err) {
         console.error('Error fetching meals:', err);
@@ -28,7 +28,7 @@ const Home = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.post(
-        'http://localhost:5000/api/orders',
+        'https://api-node-food.onrender.com/api/orders',
         { mealId },
         {
           headers: {
