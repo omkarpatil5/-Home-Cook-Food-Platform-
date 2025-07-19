@@ -8,7 +8,7 @@ const MyMeals = () => {
     const fetchMeals = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get('https://api-node-food.onrender.com/api/meals/my-meals', {
+        const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/meals/my-meals`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
