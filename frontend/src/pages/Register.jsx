@@ -26,7 +26,7 @@ const Register = () => {
     setError('');
     setSuccess('');
     try {
-      const res = await axios.post('https://api-node-food.onrender.com/api/auth/register', formData);
+      const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/auth/register`, formData);
       setSuccess('Registration successful! Redirecting to login...');
       setTimeout(() => navigate('/login'), 2000);
     } catch (err) {
