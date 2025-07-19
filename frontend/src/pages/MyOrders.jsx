@@ -12,7 +12,7 @@ const MyOrders = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const res = await axios.get('https://api-node-food.onrender.com/api/orders/my-orders', {
+        const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/orders/my-orders`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
