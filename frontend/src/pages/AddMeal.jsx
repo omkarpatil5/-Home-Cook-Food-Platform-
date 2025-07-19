@@ -25,7 +25,7 @@ const AddMeal = () => {
     try {
       const token = localStorage.getItem('token');
       const res = await axios.post(
-        'https://api-node-food.onrender.com/api/meals/add',
+        `${process.env.REACT_APP_API_BASE_URL}/api/meals/add`,
         meal,
         {
           headers: {
