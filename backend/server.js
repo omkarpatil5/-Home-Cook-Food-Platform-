@@ -9,7 +9,7 @@ import mealRoutes from './routes/mealRoutes.js';
 dotenv.config();
 const app = express();
 app.use(cors({
-  origin: 'https://your-vercel-app.vercel.app', // Replace with your actual frontend URL
+  origin: 'https://home-cook-food-platform.vercel.app/', // Replace with your actual frontend URL
   credentials: true,
 }));
 app.use(express.json());
